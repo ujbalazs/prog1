@@ -12,7 +12,7 @@ int main()
 
     // 1. 800x1000 ablak
 
-    const Point tl {100, 100};
+    Point tl {100, 100};
     Simple_window win {tl, 800, 1000, "Simple_windows"};
     win.wait_for_button();
 
@@ -26,7 +26,7 @@ int main()
     Lines grid;
     for (int x = x_grid; x < x_size; x += x_grid)
         grid.add(Point{x, 0}, Point{x, y_size});   
-    for (int y = y_grid; y < y_size; y += y_grid)
+    for (int y = y_grid; y < y_size+100; y += y_grid)
         grid.add(Point{0, y}, Point{x_size, y});
 
     
@@ -39,9 +39,9 @@ int main()
     Vector_ref<Rectangle> rects;
     for (int i = 0; i < x_size; i += x_grid) {
         rects.push_back(new Rectangle{Point{i,i}, Point{i+x_grid,i+x_grid}});
-        rects[rects.size() - 1].set_color(Color::invisible);
-        rects[rects.size() - 1].set_fill_color(Color::red);
-        win.attach(rects[rects.size() - 1]);
+        rects[rects.size() -1].set_color(Color::invisible);
+        rects[rects.size() -1] .set_fill_color(Color::red);
+        win.attach(rects[rects.size()-1]);
     }
 
     win.wait_for_button();
