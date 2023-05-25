@@ -68,20 +68,20 @@ class PirosKek(Game):
     def legal_steps(self, state):
         l = []
         for n in state["steps"]:
-            for b in state["board"].items():
-                if (b[n[0]] == 'P' or b[n[0]] == 'K') and b[n[0]] == "U":
+            if (state["board"][n[0]] == 'P' or state["board"][n[0]] == 'K') and state["board"][n[1]] == "U":
                     l.append(n)
 
+        return l                 
+                    
 
     def take_step(self, step, state):
         """Effect of the step"""
         if step not in state['steps']:
             return state
         board = state['board'].copy()
-        board[step[0]] = state['next']
-        board[step[1]] = 'U'
+        board[step[1]] = state['next']
+        board[step[0]] = 'U'
         steps = list(state['steps'])
-        steps.remove(step)
         return {
             'next': 'K' if state['next'] == 'P' else 'P',
             'result': self.result(board, step, state['next']),  # need to change
